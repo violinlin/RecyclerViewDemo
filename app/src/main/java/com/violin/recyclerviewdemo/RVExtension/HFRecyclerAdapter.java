@@ -203,12 +203,25 @@ public class HFRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         int headerViewsCountCount = getHeaderViewsCount();
         if (position >= headerViewsCountCount && position < headerViewsCountCount + mInnerAdapter.getItemCount()) {
             mInnerAdapter.onBindViewHolder(holder, position - headerViewsCountCount);
-        } else {
-            ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-            if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams) {
-                ((StaggeredGridLayoutManager.LayoutParams) layoutParams).setFullSpan(true);
-            }
         }
+
+    }
+
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        mInnerAdapter.onViewAttachedToWindow(holder);
+        // 处理Staggered模式下添加header/footer问题
+
+        int position =holder.getLayoutPosition();
+        if (isHeader(position)||isFooter(position)){
+            ViewGroup.LayoutParams layoutParams=holder.itemView.getLayoutParams();
+            if (layoutParams!=null&& layoutParams instanceof StaggeredGridLayoutManager.LayoutParams){
+                StaggeredGridLayoutManager.LayoutParams p= (StaggeredGridLayoutManager.LayoutParams) layoutParams;
+                p.setFullSpan(true);
+            }
+
+        }
+
 
     }
 

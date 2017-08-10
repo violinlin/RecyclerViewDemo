@@ -2,7 +2,10 @@ package com.violin.recyclerviewdemo.RVExtension;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by whl on 2017/8/9.
@@ -34,7 +37,6 @@ public class HFRecyclerControl {
                 }
             });
         }
-
     }
 
     public void addHeaderView(View header){
