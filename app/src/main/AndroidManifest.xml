@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".demo.GridActivity" />
-        <activity android:name=".demo.LinearActivity"></activity>
+        <activity android:name=".demo.LinearActivity" />
+        <activity android:name=".demo.StaggeredActivity"></activity>
     </application>
 
 </manifest>

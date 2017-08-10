@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.violin.recyclerviewdemo.demo.GridActivity;
 import com.violin.recyclerviewdemo.demo.LinearActivity;
+import com.violin.recyclerviewdemo.demo.StaggeredActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,19 +22,28 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Button addHeader = (Button) findViewById(R.id.bt_liner);
-        addHeader.setOnClickListener(new View.OnClickListener() {
+        Button linear = (Button) findViewById(R.id.bt_liner);
+        linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LinearActivity.launch(v.getContext());
             }
         });
 
-        Button addFooter = (Button) findViewById(R.id.bt_grid);
-        addFooter.setOnClickListener(new View.OnClickListener() {
+        Button grid = (Button) findViewById(R.id.bt_grid);
+        grid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GridActivity.launch(v.getContext());
+            }
+        });
+
+        final Button staggered= (Button) findViewById(R.id.bt_staggered);
+
+        staggered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StaggeredActivity.launch(v.getContext());
             }
         });
 

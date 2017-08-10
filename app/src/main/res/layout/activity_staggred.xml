@@ -8,24 +8,23 @@
     tools:context="com.violin.recyclerviewdemo.MainActivity">
 
     <Button
-        android:id="@+id/bt_liner"
+        android:id="@+id/bt_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LinearActivity"
+        android:text="添加header view"
         android:textAllCaps="false" />
 
     <Button
-        android:id="@+id/bt_grid"
+        android:id="@+id/bt_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="GridActivity"
+        android:text="添加footer view"
         android:textAllCaps="false" />
-    <Button
-        android:id="@+id/bt_staggered"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="StaggredActivity"
-        android:textAllCaps="false" />
-
-
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_view"
+        />
 </LinearLayout>
