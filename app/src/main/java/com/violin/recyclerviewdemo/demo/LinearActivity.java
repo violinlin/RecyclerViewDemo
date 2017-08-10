@@ -16,56 +16,82 @@ import android.widget.TextView;
 import com.violin.recyclerviewdemo.R;
 import com.violin.recyclerviewdemo.RVExtension.HFRecyclerControl;
 import com.violin.recyclerviewdemo.RecyclerAdapter;
+import com.violin.recyclerviewdemo.nextpage.NextPageControl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LinearActivity extends AppCompatActivity {
 
     private HFRecyclerControl hfRecyclerControl;
+    private Timer timer;
+    private NextPageControl nextPageControl;
+    private RecyclerAdapter mAdapter;
+
+    public int pageSize =3;
 
 
-    public static void launch(Context context){
-        Intent intent=new Intent(context,LinearActivity.class);
+    public static void launch(Context context) {
+        Intent intent = new Intent(context, LinearActivity.class);
         context.startActivity(intent);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_linear);
+        timer = new Timer();
         initView();
+
+        loadNextPage(1);
     }
 
     private void initView() {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        RecyclerAdapter mAdapter = new RecyclerAdapter();
+        mAdapter = new RecyclerAdapter();
         List<String> datas = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             datas.add("item" + i);
         }
         mAdapter.setDatas(datas);
 
-        LinearLayoutManager manager=new LinearLayoutManager(this);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
 
         recyclerView.setAdapter(mAdapter);
 
+
         hfRecyclerControl = new HFRecyclerControl();
 
-        hfRecyclerControl.setAdapter(recyclerView,mAdapter);
+        hfRecyclerControl.setAdapter(recyclerView, mAdapter);
+
+        nextPageControl = new NextPageControl();
+        nextPageControl.setUpWinthRecyclerView(recyclerView);
+
+        nextPageControl.linkHFRecycler(hfRecyclerControl);
+
+        nextPageControl.setListener(new NextPageControl.Listener() {
+            @Override
+            public void requestNextPageData(int pageNo) {
+                loadNextPage(pageNo);
+
+            }
+        });
 
 
         Button addHeader = (Button) findViewById(R.id.bt_header);
         addHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView textView=new TextView(v.getContext());
+                TextView textView = new TextView(v.getContext());
                 textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 textView.setGravity(Gravity.CENTER);
-                int count= hfRecyclerControl.getHeaderCount()+1;
-                textView.setText("headerview"+count);
+                int count = hfRecyclerControl.getHeaderCount() + 1;
+                textView.setText("headerview" + count);
                 hfRecyclerControl.addHeaderView(textView);
             }
         });
@@ -74,14 +100,46 @@ public class LinearActivity extends AppCompatActivity {
         addFooter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView textView=new TextView(v.getContext());
+                TextView textView = new TextView(v.getContext());
                 textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 textView.setGravity(Gravity.CENTER);
-                int count= hfRecyclerControl.getFooterCount()+1;
-                textView.setText("footerView"+count);
+                int count = hfRecyclerControl.getFooterCount() + 1;
+                textView.setText("footerView" + count);
                 hfRecyclerControl.addFooterView(textView);
             }
         });
+
+
+    }
+
+    private void loadNextPage( int page){
+
+
+        TimerTask task=new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        List<String> list=new ArrayList<>();
+                        for (int i=0;i<10;i++){
+                            list.add("item"+i);
+                        }
+                        mAdapter.addDatas(list);
+                        --pageSize;
+                        nextPageControl.parsePageData(pageSize,2);
+
+                    }
+                });
+
+
+
+
+            }
+        };
+
+        timer.schedule(task, 2000);
+
 
 
     }

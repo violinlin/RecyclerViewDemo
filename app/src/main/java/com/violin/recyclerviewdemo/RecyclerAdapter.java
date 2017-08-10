@@ -24,6 +24,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RViewH
     }
 
     public void setDatas(List<String> list){
+        datas.clear();
+        datas.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void addDatas(List<String > list){
         datas.addAll(list);
         notifyDataSetChanged();
     }

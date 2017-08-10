@@ -55,6 +55,7 @@ public class HFRecyclerControl {
         return hfAdapter.getFooterViewsCount();
     }
 
-
-
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
 }
