@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.violin.recyclerviewdemo.R;
 import com.violin.recyclerviewdemo.RVExtension.HFRecyclerControl;
@@ -30,7 +32,7 @@ public class LinearActivity extends AppCompatActivity {
     private NextPageControl nextPageControl;
     private RecyclerAdapter mAdapter;
 
-    public int pageSize =3;
+    public int pageSize =5;
 
 
     public static void launch(Context context) {
@@ -52,11 +54,6 @@ public class LinearActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mAdapter = new RecyclerAdapter();
-        List<String> datas = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            datas.add("item" + i);
-        }
-        mAdapter.setDatas(datas);
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -112,8 +109,7 @@ public class LinearActivity extends AppCompatActivity {
 
     }
 
-    private void loadNextPage( int page){
-
+    private void loadNextPage(final int page){
 
         TimerTask task=new TimerTask() {
             @Override
@@ -123,11 +119,11 @@ public class LinearActivity extends AppCompatActivity {
                     public void run() {
                         List<String> list=new ArrayList<>();
                         for (int i=0;i<10;i++){
-                            list.add("item"+i);
+                            list.add("item"+(mAdapter.getDatas().size()+i)+"position");
                         }
                         mAdapter.addDatas(list);
                         --pageSize;
-                        nextPageControl.parsePageData(pageSize,2);
+                        nextPageControl.parsePageData(pageSize,page);
 
                     }
                 });

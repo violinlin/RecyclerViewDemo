@@ -3,6 +3,7 @@ package com.violin.recyclerviewdemo.nextpage;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.violin.recyclerviewdemo.RVExtension.HFRecyclerControl;
@@ -70,6 +71,7 @@ public class NextPageControl {
     public void parsePageData(int pageSize, int pageNo) {
         this.pageNo = pageNo;
         hasMore = pageSize > 0;
+        isRequestNexting=false;
 //        没有更多数据
         if (pageSize <= 0) {
             if (pageNo != 1) {
@@ -92,6 +94,9 @@ public class NextPageControl {
     }
 
     private void parseNextPage(boolean isSlidingToLast) {
+        if (isRequestNexting){
+            return;
+        }
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
 
         int lastVisibleItem = 0, totalItemCount = 0;
@@ -112,7 +117,7 @@ public class NextPageControl {
             totalItemCount = manager.getItemCount();
         }
 
-        // 判断是否滚动到底部，并且是向右滚动
+        // 判断是否滚动到底部，并且是向下滚动
         if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
             //加载更多功能的代码
             if (listener != null) {
