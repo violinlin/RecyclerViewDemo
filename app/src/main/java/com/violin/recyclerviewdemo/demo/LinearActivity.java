@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,7 +33,7 @@ public class LinearActivity extends AppCompatActivity {
     private NextPageControl nextPageControl;
     private RecyclerAdapter mAdapter;
 
-    public int pageSize =2;
+    public int pageSize = 2;
 
 
     public static void launch(Context context) {
@@ -60,7 +61,8 @@ public class LinearActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
 
         recyclerView.setAdapter(mAdapter);
-
+recyclerView.addItemDecoration(new DividerItemDecoration(this,LinearLayout.VERTICAL));
+//        recyclerView.addItemDecoration(new RecyclerItemDecoration(this, 10));
 
         hfRecyclerControl = new HFRecyclerControl();
 
@@ -110,40 +112,37 @@ public class LinearActivity extends AppCompatActivity {
         findViewById(R.id.bt_item).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.insertItem(2,"insert");
+                mAdapter.insertItem(2, "insert");
             }
         });
 
 
     }
 
-    private void loadNextPage(final int page){
+    private void loadNextPage(final int page) {
 
-        TimerTask task=new TimerTask() {
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        List<String> list=new ArrayList<>();
-                        for (int i=0;i<10;i++){
-                            list.add("item"+(mAdapter.getDatas().size()+i)+"position");
+                        List<String> list = new ArrayList<>();
+                        for (int i = 0; i < 10; i++) {
+                            list.add("item" + (mAdapter.getDatas().size() + i) + "position");
                         }
                         mAdapter.addDatas(list);
                         --pageSize;
-                        nextPageControl.parsePageData(pageSize,page);
+                        nextPageControl.parsePageData(pageSize, page);
 
                     }
                 });
-
-
 
 
             }
         };
 
         timer.schedule(task, 2000);
-
 
 
     }
