@@ -32,7 +32,7 @@ public class LinearActivity extends AppCompatActivity {
     private NextPageControl nextPageControl;
     private RecyclerAdapter mAdapter;
 
-    public int pageSize =5;
+    public int pageSize =2;
 
 
     public static void launch(Context context) {
@@ -103,6 +103,14 @@ public class LinearActivity extends AppCompatActivity {
                 int count = hfRecyclerControl.getFooterCount() + 1;
                 textView.setText("footerView" + count);
                 hfRecyclerControl.addFooterView(textView);
+            }
+        });
+
+
+        findViewById(R.id.bt_item).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.insertItem(2,"insert");
             }
         });
 

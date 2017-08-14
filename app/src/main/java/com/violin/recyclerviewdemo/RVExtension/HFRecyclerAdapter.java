@@ -35,7 +35,7 @@ public class HFRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         @Override
         public void onItemRangeChanged(int positionStart, int itemCount) {
             super.onItemRangeChanged(positionStart, itemCount);
-            notifyItemChanged(positionStart+getHeaderViewsCount(),itemCount);
+            notifyItemRangeChanged(positionStart+getHeaderViewsCount(),itemCount);
         }
 
         @Override

@@ -20,6 +20,12 @@
         android:layout_height="wrap_content"
         android:text="添加footer view"
         android:textAllCaps="false" />
+    <Button
+        android:id="@+id/bt_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="添加item view"
+        android:textAllCaps="false" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
