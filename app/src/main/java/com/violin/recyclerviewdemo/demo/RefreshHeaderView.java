@@ -1,0 +1,120 @@
+package com.violin.recyclerviewdemo.demo;
+
+import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.violin.recyclerviewdemo.R;
+import com.violin.recyclerviewdemo.refresh.IRefreshStatus;
+
+/**
+ * Created by whl on 2017/8/15.
+ */
+
+public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
+
+    private ProgressBar progressBar;
+    private ImageView imageView;
+    private TextView textView;
+
+    private RotateAnimation rotateAnimation;
+
+    private RotateAnimation rotateReverseAnimation;
+    private AnimationDrawable animationDrawable;
+
+    public RefreshHeaderView(Context context) {
+        this(context, null);
+    }
+
+    public RefreshHeaderView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        setOrientation(HORIZONTAL);
+        setGravity(Gravity.CENTER);
+        inflate(context, R.layout.refresh_header_layout, this);
+        initView();
+        initAnimation();
+    }
+
+    private void initAnimation() {
+        rotateAnimation = new RotateAnimation(0, -180, Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_PARENT, 0.5f);
+        rotateAnimation.setFillAfter(true);
+        rotateAnimation.setRepeatCount(0);
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+        rotateAnimation.setDuration(100);
+
+
+        rotateReverseAnimation=new RotateAnimation(-180,0,Animation.RELATIVE_TO_SELF,0.5f,
+                Animation.RELATIVE_TO_SELF,0.5f);
+
+        rotateReverseAnimation.setFillAfter(true);
+        rotateReverseAnimation.setRepeatCount(0);
+        rotateReverseAnimation.setInterpolator(new LinearInterpolator());
+        rotateReverseAnimation.setDuration(100);
+
+
+    }
+
+    private void initView() {
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        imageView = (ImageView) findViewById(R.id.iv_imageview);
+
+        textView = (TextView) findViewById(R.id.textview);
+
+    }
+
+    @Override
+    public void reset() {
+        textView.setText("下拉刷新");
+        progressBar.setVisibility(GONE);
+        imageView.clearAnimation();
+        imageView.setImageResource(R.drawable.refresh_arrow);
+    }
+
+    @Override
+    public void refreshing() {
+        textView.setText("正在刷新...");
+        imageView.setImageResource(R.drawable.spinner);
+        animationDrawable = (AnimationDrawable) imageView.getDrawable();
+        animationDrawable.start();
+    }
+
+    @Override
+    public void refreshComplete() {
+        textView.setText("刷新完成");
+    }
+
+    @Override
+    public void pullToRefresh() {
+        textView.setText("释放立即刷新");
+        imageView.clearAnimation();
+        imageView.setAnimation(rotateAnimation);
+        imageView.startAnimation(rotateAnimation);
+    }
+
+    @Override
+    public void releaseToRefresh() {
+        textView.setText("下拉刷新");
+        imageView.clearAnimation();
+        imageView.setAnimation(rotateReverseAnimation);
+        imageView.startAnimation(rotateReverseAnimation);
+
+    }
+
+    @Override
+    public void pullProgress(float pullDistance, float pullProgress) {
+//        Log.w("whl","pulldistance"+pullDistance+"progress"+pullProgress);
+
+    }
+}

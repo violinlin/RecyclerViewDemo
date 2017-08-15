@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.violin.recyclerviewdemo.R;
 import com.violin.recyclerviewdemo.RVExtension.HFRecyclerControl;
 import com.violin.recyclerviewdemo.RecyclerAdapter;
+import com.violin.recyclerviewdemo.refresh.RecyclerRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,21 @@ public class GridActivity extends AppCompatActivity {
         initView();
     }
     private void initView() {
+
+        final RecyclerRefreshLayout refreshLayout= (RecyclerRefreshLayout) findViewById(R.id.refresh_layout);
+        refreshLayout.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                refreshLayout.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                    }
+                },2000);
+
+            }
+        });
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         RecyclerAdapter mAdapter = new RecyclerAdapter();

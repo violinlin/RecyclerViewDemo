@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#bebebe"
     tools:context="com.violin.recyclerviewdemo.MainActivity">
 
     <Button
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="添加footer view"
         android:textAllCaps="false" />
+
     <Button
         android:id="@+id/bt_item"
         android:layout_width="match_parent"
@@ -27,10 +29,18 @@
         android:text="添加item view"
         android:textAllCaps="false" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <com.violin.recyclerviewdemo.refresh.RecyclerRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_view"
-        />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_view" />
+    </com.violin.recyclerviewdemo.refresh.RecyclerRefreshLayout>
+
 </LinearLayout>

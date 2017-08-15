@@ -2,24 +2,23 @@ package com.violin.recyclerviewdemo.demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.violin.recyclerviewdemo.R;
 import com.violin.recyclerviewdemo.RVExtension.HFRecyclerControl;
 import com.violin.recyclerviewdemo.RecyclerAdapter;
 import com.violin.recyclerviewdemo.nextpage.NextPageControl;
+import com.violin.recyclerviewdemo.refresh.RecyclerRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +33,7 @@ public class LinearActivity extends AppCompatActivity {
     private RecyclerAdapter mAdapter;
 
     public int pageSize = 2;
+    private RecyclerRefreshLayout refreshLayout;
 
 
     public static void launch(Context context) {
@@ -53,6 +53,17 @@ public class LinearActivity extends AppCompatActivity {
 
     private void initView() {
 
+        refreshLayout = (RecyclerRefreshLayout) findViewById(R.id.refresh_layout);
+        ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        refreshLayout.setRefreshView(new RefreshHeaderView(this),params);
+
+        refreshLayout.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadNextPage(0);
+            }
+        });
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mAdapter = new RecyclerAdapter();
 
@@ -61,8 +72,8 @@ public class LinearActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
 
         recyclerView.setAdapter(mAdapter);
-recyclerView.addItemDecoration(new DividerItemDecoration(this,LinearLayout.VERTICAL));
-//        recyclerView.addItemDecoration(new RecyclerItemDecoration(this, 10));
+//recyclerView.addItemDecoration(new DividerItemDecoration(this,LinearLayout.VERTICAL));
+        recyclerView.addItemDecoration(new RecyclerItemDecoration(this, 5));
 
         hfRecyclerControl = new HFRecyclerControl();
 
@@ -133,6 +144,9 @@ recyclerView.addItemDecoration(new DividerItemDecoration(this,LinearLayout.VERTI
                         }
                         mAdapter.addDatas(list);
                         --pageSize;
+//                        if (page==0){
+                        refreshLayout.setRefreshing(false);
+//                        }
                         nextPageControl.parsePageData(pageSize, page);
 
                     }
