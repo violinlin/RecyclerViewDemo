@@ -56,6 +56,9 @@ public class LinearActivity extends AppCompatActivity {
         refreshLayout = (RecyclerRefreshLayout) findViewById(R.id.refresh_layout);
         ViewGroup.LayoutParams params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         refreshLayout.setRefreshView(new RefreshHeaderView(this),params);
+        refreshLayout.setRefreshStyle(RecyclerRefreshLayout.RefreshStyle.NORMAL);
+
+        refreshLayout.setDragDistanceConverter(new RefreshDiatanceConverter());
 
         refreshLayout.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
             @Override

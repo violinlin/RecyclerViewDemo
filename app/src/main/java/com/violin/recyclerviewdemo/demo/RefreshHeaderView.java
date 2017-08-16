@@ -10,8 +10,6 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.violin.recyclerviewdemo.R;
@@ -23,7 +21,6 @@ import com.violin.recyclerviewdemo.refresh.IRefreshStatus;
 
 public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
 
-    private ProgressBar progressBar;
     private ImageView imageView;
     private TextView textView;
 
@@ -67,7 +64,6 @@ public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
     }
 
     private void initView() {
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         imageView = (ImageView) findViewById(R.id.iv_imageview);
 
         textView = (TextView) findViewById(R.id.textview);
@@ -77,7 +73,6 @@ public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
     @Override
     public void reset() {
         textView.setText("下拉刷新");
-        progressBar.setVisibility(GONE);
         imageView.clearAnimation();
         imageView.setImageResource(R.drawable.refresh_arrow);
     }
@@ -114,7 +109,7 @@ public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
 
     @Override
     public void pullProgress(float pullDistance, float pullProgress) {
-//        Log.w("whl","pulldistance"+pullDistance+"progress"+pullProgress);
+        Log.w("whl","pulldistance"+pullDistance+"progress"+pullProgress);
 
     }
 }
