@@ -420,7 +420,7 @@ public class RecyclerRefreshLayout extends ViewGroup
 
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
-        // If we are in the middle of consuming, a scroll, then we want to move the spinner back up
+        // If we are in the middle of consuming, a scroll, then we want to move the loading back up
         // before allowing the list to scroll
         if (dy > 0 && mTotalUnconsumed > 0) {
             if (dy > mTotalUnconsumed) {
@@ -452,7 +452,7 @@ public class RecyclerRefreshLayout extends ViewGroup
     public void onStopNestedScroll(View target) {
         mNestedScrollingParentHelper.onStopNestedScroll(target);
         mNestedScrollInProgress = false;
-        // Finish the spinner for nested scrolling if we ever consumed any
+        // Finish the loading for nested scrolling if we ever consumed any
         // unconsumed nested scroll
         if (mTotalUnconsumed > 0) {
             finishSpinner();

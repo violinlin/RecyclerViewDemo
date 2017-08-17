@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import com.violin.recyclerviewdemo.R;
 import com.violin.recyclerviewdemo.refresh.IRefreshStatus;
+
+import static android.view.animation.Animation.INFINITE;
 
 /**
  * Created by whl on 2017/8/15.
@@ -27,7 +30,8 @@ public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
     private RotateAnimation rotateAnimation;
 
     private RotateAnimation rotateReverseAnimation;
-    private AnimationDrawable animationDrawable;
+
+    private RotateAnimation loadingAnimation;
 
     public RefreshHeaderView(Context context) {
         this(context, null);
@@ -59,6 +63,7 @@ public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
         rotateReverseAnimation.setRepeatCount(0);
         rotateReverseAnimation.setInterpolator(new LinearInterpolator());
         rotateReverseAnimation.setDuration(100);
+        loadingAnimation = (RotateAnimation) AnimationUtils.loadAnimation(getContext(), R.anim.loading);
 
 
     }
@@ -80,9 +85,9 @@ public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
     @Override
     public void refreshing() {
         textView.setText("正在刷新...");
-        imageView.setImageResource(R.drawable.spinner);
-        animationDrawable = (AnimationDrawable) imageView.getDrawable();
-        animationDrawable.start();
+        imageView.setImageResource(R.drawable.loading);
+        imageView.startAnimation(loadingAnimation);
+
     }
 
     @Override
@@ -109,7 +114,6 @@ public class RefreshHeaderView extends LinearLayout implements IRefreshStatus {
 
     @Override
     public void pullProgress(float pullDistance, float pullProgress) {
-        Log.w("whl","pulldistance"+pullDistance+"progress"+pullProgress);
 
     }
 }
