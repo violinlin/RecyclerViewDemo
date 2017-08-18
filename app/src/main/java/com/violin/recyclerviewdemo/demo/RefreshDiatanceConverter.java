@@ -9,6 +9,6 @@ import com.violin.recyclerviewdemo.refresh.IDragDistanceConverter;
 public class RefreshDiatanceConverter implements IDragDistanceConverter {
     @Override
     public float convert(float scrollDistance, float refreshDistance) {
-        return scrollDistance*0.25f;
+        return scrollDistance*0.3f;
     }
 }
