@@ -1,10 +1,8 @@
-package com.violin.recyclerviewdemo.nextpage;
+package com.violin.recyclerviewdemo.kit.nextpage;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.violin.recyclerviewdemo.RVExtension.HFRecyclerControl;
 

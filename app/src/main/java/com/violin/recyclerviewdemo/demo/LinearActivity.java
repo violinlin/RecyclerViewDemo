@@ -2,7 +2,6 @@ package com.violin.recyclerviewdemo.demo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +16,8 @@ import android.widget.TextView;
 import com.violin.recyclerviewdemo.R;
 import com.violin.recyclerviewdemo.RVExtension.HFRecyclerControl;
 import com.violin.recyclerviewdemo.RecyclerAdapter;
-import com.violin.recyclerviewdemo.nextpage.NextPageControl;
-import com.violin.recyclerviewdemo.refresh.RecyclerRefreshLayout;
+import com.violin.recyclerviewdemo.kit.nextpage.NextPageControl;
+import com.violin.recyclerviewdemo.kit.refresh.RecyclerRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;

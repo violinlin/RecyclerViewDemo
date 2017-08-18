@@ -1,4 +1,4 @@
-package com.violin.recyclerviewdemo.refresh;
+package com.violin.recyclerviewdemo.kit.refresh;
 
 /**
  * {@link RecyclerRefreshLayout#mRefreshView} all the custom drop-down refresh view need to

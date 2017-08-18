@@ -1,4 +1,4 @@
-package com.violin.recyclerviewdemo.refresh;
+package com.violin.recyclerviewdemo.kit.refresh;
 
 public interface IDragDistanceConverter {
     /**

@@ -1,6 +1,6 @@
 package com.violin.recyclerviewdemo.demo;
 
-import com.violin.recyclerviewdemo.refresh.IDragDistanceConverter;
+import com.violin.recyclerviewdemo.kit.refresh.IDragDistanceConverter;
 
 /**
  * Created by whl on 2017/8/16.

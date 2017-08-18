@@ -1,9 +1,7 @@
 package com.violin.recyclerviewdemo.demo;
 
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,9 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.violin.recyclerviewdemo.R;
-import com.violin.recyclerviewdemo.refresh.IRefreshStatus;
-
-import static android.view.animation.Animation.INFINITE;
+import com.violin.recyclerviewdemo.kit.refresh.IRefreshStatus;
 
 /**
  * Created by whl on 2017/8/15.

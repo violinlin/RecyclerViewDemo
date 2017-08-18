@@ -1,4 +1,4 @@
-package com.violin.recyclerviewdemo.nextpage;
+package com.violin.recyclerviewdemo.kit.nextpage;
 
 import android.content.Context;
 import android.util.AttributeSet;

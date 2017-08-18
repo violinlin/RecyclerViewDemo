@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 import com.violin.recyclerviewdemo.R;
 import com.violin.recyclerviewdemo.RVExtension.HFRecyclerControl;
 import com.violin.recyclerviewdemo.RecyclerAdapter;
-import com.violin.recyclerviewdemo.refresh.RecyclerRefreshLayout;
+import com.violin.recyclerviewdemo.kit.refresh.RecyclerRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
